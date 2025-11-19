@@ -4,19 +4,7 @@ return {
     -- event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
   },
-  {
-    "stevearc/conform.nvim",
-    opts = {
-      formatters_by_ft = {
-        lua = { "stylua" },
-        elixir = { "mix" },
-        heex = { "mix" },
-        eex = { "mix" },
-      },
-    },
-  },
 
-  -- These are some examples, uncomment them if you want to see them work!
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -24,6 +12,7 @@ return {
     end,
   },
 
+  -- These are some examples, uncomment them if you want to see them work!
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
@@ -51,5 +40,12 @@ return {
         width = 40,
       },
     },
+  },
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    config = function()
+      require "configs.ibl"
+    end,
   },
 }
