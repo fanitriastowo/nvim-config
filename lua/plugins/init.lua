@@ -15,6 +15,7 @@ return {
   -- These are some examples, uncomment them if you want to see them work!
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
     opts = {
       ensure_installed = {
         "vim",
@@ -25,8 +26,15 @@ return {
         "elixir",
         "heex",
         "eex",
+        "typescript",
+        "tsx",
       },
     },
+  },
+
+  {
+    "folke/which-key.nvim",
+    keys = { "<leader>", "<c-w>", '"', "'", "`", "c", "v", "g", "z" },
   },
 
   {
@@ -47,5 +55,22 @@ return {
     config = function()
       require "configs.ibl"
     end,
+  },
+
+  {
+    "f-person/auto-dark-mode.nvim",
+    lazy = false,
+    opts = {
+      set_dark_mode = function()
+        require("nvconfig").base46.theme = "github_dark"
+        require("base46").load_all_highlights()
+      end,
+      set_light_mode = function()
+        require("nvconfig").base46.theme = "github_light"
+        require("base46").load_all_highlights()
+      end,
+      update_interval = 3000,
+      fallback = "dark",
+    },
   },
 }
