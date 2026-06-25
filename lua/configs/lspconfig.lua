@@ -35,14 +35,11 @@ local function toggle_lsp()
     vim.notify("LSP disabled", vim.log.levels.INFO)
   else
     lsp_enabled = true
-    for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-      if vim.api.nvim_buf_is_loaded(bufnr) then
-        local ft = vim.bo[bufnr].filetype
-        if ft ~= "" then
-          vim.api.nvim_exec_autocmds("FileType", { buf = bufnr })
-          pcall(vim.treesitter.start, bufnr)
-        end
-      end
+    vim.diagnostic.reset()
+    local buf = vim.api.nvim_get_current_buf()
+    local ft = vim.bo[buf].filetype
+    if ft ~= "" then
+      vim.api.nvim_exec_autocmds("FileType", { buf = buf })
     end
     vim.notify("LSP enabled", vim.log.levels.INFO)
   end
