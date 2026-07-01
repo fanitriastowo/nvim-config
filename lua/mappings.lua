@@ -14,3 +14,30 @@ vim.keymap.set("n", "<leader>cl", function()
   print("Copied: " .. path .. "#L" .. line)
 end, { desc = "Copy file path and line number" })
 
+vim.keymap.set("x", "<leader>cl", function()
+  local path = vim.fn.expand "%:."
+  local start_line = vim.fn.line "'<"
+  local end_line = vim.fn.line "'>"
+  local result
+  if start_line == end_line then
+    result = path .. "#L" .. start_line
+  else
+    result = path .. "#L" .. start_line .. "-" .. end_line
+  end
+  vim.fn.setreg("+", result)
+  print("Copied: " .. result)
+end, { desc = "Copy file path and line range" })
+
+vim.keymap.set("n", "zl", "zl", { desc = "Scroll right" })
+vim.keymap.set("n", "zh", "zh", { desc = "Scroll left" })
+vim.keymap.set("n", "zL", "zL", { desc = "Scroll right half screen" })
+vim.keymap.set("n", "zH", "zH", { desc = "Scroll left half screen" })
+
+vim.keymap.set("n", "<leader>>", function()
+  require("nvim-tree.api").tree.resize({ relative = 5 })
+end, { desc = "Widen nvim-tree" })
+
+vim.keymap.set("n", "<leader><", function()
+  require("nvim-tree.api").tree.resize({ relative = -5 })
+end, { desc = "Narrow nvim-tree" })
+
