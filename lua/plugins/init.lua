@@ -1,5 +1,11 @@
 return {
   {
+    "echasnovski/mini.icons",
+    lazy = true,
+    opts = {},
+  },
+
+  {
     "stevearc/conform.nvim",
     -- event = 'BufWritePre', -- uncomment for format on save
     opts = require "configs.conform",
