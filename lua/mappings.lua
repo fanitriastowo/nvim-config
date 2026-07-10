@@ -16,8 +16,11 @@ end, { desc = "Copy file path and line number" })
 
 vim.keymap.set("x", "<leader>cl", function()
   local path = vim.fn.expand "%:."
-  local start_line = vim.fn.line "'<"
-  local end_line = vim.fn.line "'>"
+  local start_line = vim.fn.line "v"
+  local end_line = vim.fn.line "."
+  if start_line > end_line then
+    start_line, end_line = end_line, start_line
+  end
   local result
   if start_line == end_line then
     result = path .. "#L" .. start_line
