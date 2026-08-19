@@ -34,6 +34,7 @@ return {
         "eex",
         "typescript",
         "tsx",
+        "dart",
       },
     },
   },

@@ -6,6 +6,7 @@ local options = {
     css = { "prettier" },
     html = { "prettier" },
     go = { "goimports" },
+    dart = { "dart_format" },
   },
 
   -- format_on_save = {
