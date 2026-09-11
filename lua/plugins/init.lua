@@ -37,6 +37,15 @@ return {
         "dart",
       },
     },
+    config = function(_, opts)
+      -- nvim-treesitter `main` ignores ensure_installed and doesn't enable highlighting itself
+      require("nvim-treesitter").install(opts.ensure_installed)
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function(args)
+          pcall(vim.treesitter.start, args.buf)
+        end,
+      })
+    end,
   },
 
   {
@@ -55,6 +64,13 @@ return {
         width = 50,
       },
     },
+  },
+
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = function()
+      return require "configs.telescope"
+    end,
   },
 
   {
@@ -78,11 +94,11 @@ return {
     lazy = false,
     opts = {
       set_dark_mode = function()
-        require("nvconfig").base46.theme = "github_dark"
+        require("nvconfig").base46.theme = "tokyodark"
         require("base46").load_all_highlights()
       end,
       set_light_mode = function()
-        require("nvconfig").base46.theme = "github_light"
+        require("nvconfig").base46.theme = "flexoki-light"
         require("base46").load_all_highlights()
       end,
       update_interval = 3000,
