@@ -105,4 +105,26 @@ return {
       fallback = "dark",
     },
   },
+
+  {
+    "folke/snacks.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      image = { enabled = true },
+    },
+    config = function(_, opts)
+      require("snacks").setup(opts)
+      -- snacks leaves its "identify loading …" mark behind on the first open of an image; clear it before drawing
+      local placement = require "snacks.image.placement"
+      local render_grid = placement.render_grid
+      placement.render_grid = function(self, loc)
+        if not self.opts.inline then
+          vim.api.nvim_buf_clear_namespace(self.buf, vim.api.nvim_create_namespace "snacks.image", 0, -1)
+          self.eids = {}
+        end
+        return render_grid(self, loc)
+      end
+    end,
+  },
 }
